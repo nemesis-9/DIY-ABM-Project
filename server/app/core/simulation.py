@@ -20,7 +20,7 @@ async def tick():
 
     # update agents
     # 'find' returns an AsyncIOMotorCursor, which needs 'to_list' and 'await' to get all results
-    people = await agents.find({}).to_list(length=None)
+    people = await agents.find({"state": {"$ne": "dead"}}).to_list(length=None)
 
     # Run agent updates concurrently using asyncio.gather
     await asyncio.gather(*(update_agent(person) for person in people))
