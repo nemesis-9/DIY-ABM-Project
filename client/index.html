@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inari Simulation - Agent Dashboard</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for better readability and aesthetics */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc; /* Light gray background */
+        }
+        .agent-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .agent-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <header class="text-center mb-8">
+        <h1 class="text-4xl font-extrabold text-indigo-700">Inari Agent Status</h1>
+        <p class="text-gray-500 mt-2">Real-time view of all simulation agents (Refreshed every 2 seconds).</p>
+        <div id="status-message" class="mt-4 p-2 rounded-lg font-semibold bg-blue-100 text-blue-700">
+            Fetching data...
+        </div>
+    </header>
+
+    <div id="agent-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- Agent cards will be injected here by JavaScript -->
+    </div>
+
+    <script>
+        // NOTE: If your FastAPI server is not on port 8000, change this URL!
+        const API_BASE_URL = 'http://127.0.0.1:8000';
+        const AGENTS_URL = `${API_BASE_URL}/agents`;
+        const GRID_ELEMENT = document.getElementById('agent-grid');
+        const STATUS_ELEMENT = document.getElementById('status-message');
+
+        /**
+         * Renders a single agent's data as a card.
+         * @param {object} agent - The agent data object.
+         */
+        function createAgentCard(agent) {
+            const isDead = agent.state === 'dead';
+            const cardColor = isDead ? 'bg-red-50 border-red-300' : 'bg-white border-green-300';
+            const headerColor = isDead ? 'text-red-600' : 'text-indigo-600';
+            const statusBadge = isDead
+                ? '<span class="px-3 py-1 text-xs font-bold uppercase rounded-full bg-red-200 text-red-800">Dead</span>'
+                : `<span class="px-3 py-1 text-xs font-bold uppercase rounded-full bg-green-200 text-green-800">${agent.state || 'Alive'}</span>`;
+
+            // Function to safely display inventory details
+            const getInventoryDetails = (inventory) => {
+                if (!inventory || typeof inventory !== 'object') return 'No inventory.';
+                return Object.entries(inventory)
+                    .map(([item, count]) => `${item}: ${count}`)
+                    .join(', ');
+            };
+
+            const cardHtml = `
+                <div class="agent-card p-6 border-4 rounded-xl shadow-lg ${cardColor}">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-2xl font-bold ${headerColor}">${agent.name}</h2>
+                        ${statusBadge}
+                    </div>
+
+                    <div class="space-y-3 text-gray-700">
+                        <p class="text-lg font-medium">HP:
+                            <span class="font-bold ${agent.hp <= 20 ? 'text-red-500' : 'text-green-500'}">
+                                ${agent.hp}
+                            </span>
+                        </p>
+                        <p class="text-lg font-medium">Hunger:
+                            <span class="font-bold ${agent.hunger >= 100 ? 'text-red-500' : 'text-yellow-600'}">
+                                ${agent.hunger}
+                            </span>
+                        </p>
+                        <p><strong>Pos:</strong> (${agent.x}, ${agent.y})</p>
+                        <p><strong>Age:</strong> ${agent.age}</p>
+                        <p><strong>Inventory:</strong> ${getInventoryDetails(agent.inventory)}</p>
+                    </div>
+                </div>
+            `;
+            return cardHtml;
+        }
+
+        /**
+         * Fetches data and updates the dashboard.
+         */
+        async function fetchAndRenderAgents() {
+            try {
+                STATUS_ELEMENT.textContent = "Fetching data...";
+                STATUS_ELEMENT.classList.remove('bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
+                STATUS_ELEMENT.classList.add('bg-blue-100', 'text-blue-700');
+
+                const response = await fetch(AGENTS_URL);
+                if (!response.ok) {
+                    throw new Error(`API returned status ${response.status}`);
+                }
+                const agentsData = await response.json();
+
+                GRID_ELEMENT.innerHTML = agentsData.map(createAgentCard).join('');
+
+                STATUS_ELEMENT.textContent = `Successfully updated agent data for ${agentsData.length} agents.`;
+                STATUS_ELEMENT.classList.remove('bg-blue-100', 'text-blue-700');
+                STATUS_ELEMENT.classList.add('bg-green-100', 'text-green-700');
+
+            } catch (error) {
+                console.error("Error fetching agent data:", error);
+                GRID_ELEMENT.innerHTML = '<p class="col-span-full text-center text-red-500 font-bold p-8">Could not connect to the FastAPI backend. Please ensure the server is running and check the API_BASE_URL (currently: ' + API_BASE_URL + ').</p>';
+
+                STATUS_ELEMENT.textContent = `Error: Failed to fetch data. Check console.`;
+                STATUS_ELEMENT.classList.remove('bg-blue-100', 'text-blue-700');
+                STATUS_ELEMENT.classList.add('bg-red-100', 'text-red-700');
+            }
+        }
+
+        // Initial fetch and set up the auto-refresh loop
+        fetchAndRenderAgents();
+        // Refresh every 2 seconds
+        setInterval(fetchAndRenderAgents, 2000);
+
+    </script>
+</body>
+</html>

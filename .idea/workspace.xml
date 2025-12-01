@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86009ca5-1e24-4504-90a6-bba328e7e212" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/client/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/app/schemas/PyObjectId.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/app/schemas/schema_agent.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app/api/routes_agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/api/routes_agents.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/app/core/agent_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/core/agent_logic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app/core/simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/core/simulation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/app/core/world_init.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/core/world_init.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app/models/agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/models/agent.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +23,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="Python Script" />
       </list>
     </option>
@@ -40,6 +45,8 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -55,6 +62,16 @@
       <recent name="C:\Users\Kavishka\Documents\PythonProjects\inari\server\app" />
       <recent name="C:\Users\Kavishka\Documents\PythonProjects\inari" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" engineId="37cae5b9-e8b2-4949-9172-aafa37fbc09c" uri="http://localhost:63342/inari/client/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -75,7 +92,9 @@
       <workItem from="1764571486547" duration="10725000" />
       <workItem from="1764582552539" duration="2222000" />
       <workItem from="1764585033521" duration="129000" />
-      <workItem from="1764585183491" duration="5684000" />
+      <workItem from="1764585183491" duration="6584000" />
+      <workItem from="1764591887436" duration="6616000" />
+      <workItem from="1764602991234" duration="1466000" />
     </task>
     <servers />
   </component>

@@ -11,7 +11,7 @@ async def food_chain(agent):
         agent["hunger"] -= agent["metabolism"]
 
     # death check
-    if agent["hunger"] <= agent["hunger_max"]*2:
+    if agent["hunger"] >= agent["hunger_max"]*2:
         agent["state"] = "dead"
         agent["hp"] = 0
 

@@ -27,7 +27,6 @@ async def tick():
 
     # save world
     await worlds.update_one({"_id": "world"}, {"$set": world})
-    print(f"Tick done: {world['tick']}")
 
 
 async def sim_loop():

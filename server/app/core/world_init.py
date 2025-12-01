@@ -25,7 +25,7 @@ async def init_world():
 
     # seed 10 agents
     for i in range(10):
-        agents.insert_one(default_agent(
+        await agents.insert_one(default_agent(
             f"A{i + 1}",
             random_value(20, 60),
             random_value(0, 200),
