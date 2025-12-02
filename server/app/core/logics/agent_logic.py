@@ -1,4 +1,4 @@
-from server.app.db.mongo import agents
+from ...db.mongo import agents
 
 
 async def food_chain(agent):

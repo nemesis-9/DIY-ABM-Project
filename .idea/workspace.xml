@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="86009ca5-1e24-4504-90a6-bba328e7e212" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app/core/logics/agent_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/core/logics/agent_logic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app/core/simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/core/simulation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +53,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Kavishka\Documents\PythonProjects\inari\server\app\core\logics" />
       <recent name="C:\Users\Kavishka\Documents\PythonProjects\inari\server\app" />
       <recent name="C:\Users\Kavishka\Documents\PythonProjects\inari" />
     </key>
@@ -88,6 +90,7 @@
       <workItem from="1764585183491" duration="6584000" />
       <workItem from="1764591887436" duration="6616000" />
       <workItem from="1764602991234" duration="2842000" />
+      <workItem from="1764639408618" duration="672000" />
     </task>
     <servers />
   </component>
@@ -107,5 +110,15 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/server/app/api/agent_routes.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
