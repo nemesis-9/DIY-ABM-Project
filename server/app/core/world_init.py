@@ -1,9 +1,14 @@
+import os
 import random
+from dotenv import load_dotenv
 from ..db.mongo import worlds, agents, inventories, buildings
 from ..models.world import world_template
 from ..models.agent import default_agent
 from ..models.inventory import default_inventory
 from ..models.building import house
+
+load_dotenv()
+AGENT_COUNT = int(os.getenv('AGENT_COUNT', 10))
 
 
 def random_value(min=0, max=1):
@@ -25,28 +30,33 @@ async def init_world():
 
     await worlds.insert_one(world_template)
 
-    # seed 10 agents
-    for i in range(10):
+    # seed agents
+    for i in range(AGENT_COUNT):
         await agents.insert_one(default_agent(
             f"A{i + 1}",
             random_value(20, 60),
+            "M" if (i + 1) % 2 == 0 else "F",
             random_value(0, 200),
             random_value(0, 200),
             0,
-            random_value(60, 80),
-            random_value(30, 50),
-            random_value(80, 150)
+            random_value(35, 100) * 1.5,
+            random_value(70, 100) * 0.02,
+            random_value(80, 100)
         ))
 
-    # seed 10 inventory records
+    # seed inventory records
     people = await agents.find({}).to_list(None)
     for person in people:
         await inventories.insert_one(default_inventory(
             person["_id"],
-            {
-                "food": random_value(1, 5),
-                "water": random_value(1, 5)
-            },
+            [
+                {"count": random_value(2, 6), "cal": random_value(50, 150)},
+                {"count": random_value(1, 3), "cal": random_value(300, 550)},
+            ],
+            [
+                {"count": random_value(5, 15), "litres": random_value(500, 2000)/1000, "cal": random_value(0, 5)},
+                {"count": random_value(3, 6), "litres": random_value(300, 1000)/1000, "cal": random_value(100, 250)},
+            ],
             random_value(0, 200),
             random_value(0, 200),
             0,

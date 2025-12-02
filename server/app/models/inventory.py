@@ -1,7 +1,8 @@
-def default_inventory(agent, items, x, y, z, active=True):
+def default_inventory(agent, foods, drinks, x, y, z, active=True):
     return {
         "agent": agent,
-        "items": items,
+        "foods": foods,
+        "drinks": drinks,
         "pos": {"x": x, "y": y, "z": z},
         "isActive": active,
     }

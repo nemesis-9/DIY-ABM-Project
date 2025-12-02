@@ -8,10 +8,12 @@ router = APIRouter()
 async def combine_agent_inventories(agent_data: dict) -> dict:
     if not agent_data or '_id' not in agent_data:
         return agent_data
+
     agent_id = agent_data['_id']
     inventory = await inventories.find_one({'agent': agent_id})
-    inventory_items = inventory.get("items", {}) if inventory else {}
-    merged_data = {**agent_data, "inventory": inventory_items}
+
+    inventory_data = inventory if inventory else {}
+    merged_data = {**agent_data, "inventory": inventory_data}
     return merged_data
 
 

@@ -1,4 +1,5 @@
 from ...db.mongo import agents, inventories
+from ..behaviours.physical.ingestion import ingestion
 
 
 async def food_chain(agent):
@@ -23,4 +24,4 @@ async def food_chain(agent):
 
 
 async def update_agent(agent):
-    await food_chain(agent)
+    await ingestion(agent)

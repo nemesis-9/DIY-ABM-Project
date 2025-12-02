@@ -35,8 +35,8 @@
         </div>
     </header>
 
-    <div id="agent-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        </div>
+    <div id="agent-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+    </div>
 
     <script>
         // NOTE: If your FastAPI server is not on port 8000, change this URL!
@@ -46,20 +46,24 @@
         const STATUS_ELEMENT = document.getElementById('status-message');
 
         /**
+         * Formats a number to two decimal places.
+         * @param {number} num - The number to format.
+         */
+        const toFixed = (num) => (typeof num === 'number' ? num.toFixed(2) : 'N/A');
+
+        /**
          * Renders a single agent's data as a card.
          * @param {object} agent - The agent data object.
          */
         function createAgentCard(agent) {
             // Destructure the position object for cleaner access
-            const x_pos = agent.pos ? agent.pos.x : 'N/A';
-            const y_pos = agent.pos ? agent.pos.y : 'N/A';
+            const x_pos = agent.pos ? toFixed(agent.pos.x) : 'N/A';
+            const y_pos = agent.pos ? toFixed(agent.pos.y) : 'N/A';
 
-            // --- FIX APPLIED HERE ---
-            // Safely convert agent.id to a string before using substring().
+            // Safely convert agent.id to a string
             const agentIdString = String(agent.id);
-            // ------------------------
 
-            const isDead = agent.state === 'dead';
+            const isDead = agent.state && agent.state.toLowerCase() === 'dead';
             const cardColor = isDead ? 'bg-red-50 border-red-300' : 'bg-white border-green-300';
             const headerColor = isDead ? 'text-red-600' : 'text-indigo-600';
             const statusBadge = isDead
@@ -68,19 +72,53 @@
 
             // Function to safely display inventory details
             const getInventoryDetails = (inventory) => {
-                if (!inventory || typeof inventory !== 'object' || Object.keys(inventory).length === 0) return 'Empty';
-                return Object.entries(inventory)
-                    .map(([item, count]) => `${item} x${count}`)
-                    .join(', ');
+                if (!inventory || typeof inventory !== 'object') return 'Empty';
+
+                let items = [];
+
+                const processItems = (type, list) => {
+                    if (Array.isArray(list)) {
+                        list.forEach((item, index) => {
+                            // Determine the display name based on available properties
+                            let item_name = `${type.slice(0, -1)} ${index + 1}`; // e.g., "food 1"
+
+                            if (type === 'foods' && item.cal) {
+                                item_name += ` (${item.cal}kcal)`;
+                            } else if (type === 'drinks' && item.litres) {
+                                // Display volume and calories for drinks
+                                item_name += ` (${toFixed(item.litres)}L / ${item.cal}kcal)`;
+                            }
+
+                            if (item.count) {
+                                items.push(`${item_name} x${item.count}`);
+                            }
+                        });
+                    }
+                };
+
+                // Inventory object now contains the arrays 'foods' and 'drinks'
+                processItems('foods', inventory.foods);
+                processItems('drinks', inventory.drinks);
+
+                return items.length > 0 ? items.join(', ') : 'Empty';
             };
 
             // Function to safely display skills details
             const getSkillsDetails = (skills) => {
                 if (!skills || typeof skills !== 'object' || Object.keys(skills).length === 0) return 'None';
+                // Assuming skills is structured like: { "combat": 5, "stealth": 3 }
                 return Object.entries(skills)
                     .map(([skill, level]) => `${skill} Lv${level}`)
                     .join(', ');
             };
+
+            // Calculate status colors based on new float fields
+            const hunger_ratio = agent.hungry / agent.max_hungry;
+            const thirsty_ratio = agent.thirsty / agent.max_thirsty;
+
+            const hunger_color = hunger_ratio >= 0.8 ? 'text-red-500' : (hunger_ratio >= 0.5 ? 'text-yellow-600' : 'text-green-500');
+            const thirsty_color = thirsty_ratio >= 0.8 ? 'text-red-500' : (thirsty_ratio >= 0.5 ? 'text-yellow-600' : 'text-green-500');
+
 
             const cardHtml = `
                 <div class="agent-card p-6 border-4 rounded-xl shadow-lg ${cardColor}">
@@ -95,26 +133,46 @@
 
                     <div class="space-y-3 text-sm text-gray-700">
 
-                        <div class="grid grid-cols-2 gap-4">
-                            <p class="font-medium">
-                                <strong class="text-gray-900">HP:</strong>
-                                <span class="font-bold ${agent.hp <= 20 ? 'text-red-500' : 'text-green-500'}">
+                        <div class="grid grid-cols-3 gap-3 text-center">
+                            <div class="border-r border-gray-200">
+                                <strong class="text-gray-900 block">HP</strong>
+                                <span class="font-bold text-lg ${agent.hp <= 20 ? 'text-red-500' : 'text-green-500'}">
                                     ${agent.hp}
                                 </span>
-                            </p>
-                            <p class="font-medium">
-                                <strong class="text-gray-900">Hunger:</strong>
-                                <span class="font-bold ${agent.hunger >= agent.hunger_max * 0.8 ? 'text-red-500' : 'text-yellow-600'}">
-                                    ${agent.hunger} / ${agent.hunger_max}
+                            </div>
+                            <div class="border-r border-gray-200">
+                                <strong class="text-gray-900 block">Hunger</strong>
+                                <span class="font-bold text-lg ${hunger_color}">
+                                    ${toFixed(agent.hungry)}
                                 </span>
-                            </p>
+                                <span class="text-xs text-gray-500">/ ${toFixed(agent.max_hungry)}</span>
+                            </div>
+                            <div>
+                                <strong class="text-gray-900 block">Thirst</strong>
+                                <span class="font-bold text-lg ${thirsty_color}">
+                                    ${toFixed(agent.thirsty)}
+                                </span>
+                                <span class="text-xs text-gray-500">/ ${toFixed(agent.max_thirsty)}</span>
+                            </div>
                         </div>
 
                         <hr class="border-gray-200">
 
-                        <div class="grid grid-cols-3 gap-4">
+                        <p class="font-bold text-gray-900 mb-1">Physical Metrics:</p>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <p><strong>BMR:</strong> ${toFixed(agent.bmr)}</p>
+                            <p><strong>Metabolism:</strong> ${toFixed(agent.metabolism)}</p>
+                            <p><strong>Energy Stored:</strong> ${toFixed(agent.energy_stored)}</p>
+                            <p><strong>Body Hydrate:</strong> ${toFixed(agent.body_hydrate)}</p>
+                            <p><strong>Weight:</strong> ${toFixed(agent.weight)} kg</p>
+                            <p><strong>Height:</strong> ${toFixed(agent.height)} cm</p>
+                        </div>
+
+                        <hr class="border-gray-200">
+
+                        <div class="grid grid-cols-3 gap-4 text-xs">
                             <p><strong>Age:</strong> ${agent.age}</p>
-                            <p><strong>Metabolism:</strong> ${agent.metabolism}</p>
+                            <p><strong>Gender:</strong> ${agent.gender.toUpperCase()}</p>
                             <p><strong>Pos:</strong> (${x_pos}, ${y_pos})</p>
                         </div>
 
@@ -122,12 +180,12 @@
 
                         <p class="font-medium">
                             <strong class="text-gray-900">Inventory:</strong>
-                            <span class="block mt-1 p-2 bg-gray-100 rounded">${getInventoryDetails(agent.inventory)}</span>
+                            <span class="block mt-1 p-2 bg-gray-100 rounded text-xs">${getInventoryDetails(agent.inventory)}</span>
                         </p>
 
                         <p class="font-medium">
                             <strong class="text-gray-900">Skills:</strong>
-                            <span class="block mt-1 p-2 bg-gray-100 rounded">${getSkillsDetails(agent.skills)}</span>
+                            <span class="block mt-1 p-2 bg-gray-100 rounded text-xs">${getSkillsDetails(agent.skills)}</span>
                         </p>
 
                     </div>
