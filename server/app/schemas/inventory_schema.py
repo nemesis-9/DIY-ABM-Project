@@ -3,20 +3,15 @@ from .PyObjectId import PyObjectId
 from bson import ObjectId
 
 
-class AgentSchema(BaseModel):
+class InventorySchema(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias='_id')
-    name: str
-    age: int
+    agent: PyObjectId = Field(default_factory=PyObjectId, alias='agent')
+    items: dict = {}
     pos: dict = {}
-    state: str
-    hunger: int
-    hunger_max: int
-    metabolism: int
-    hp: int
-    skills: dict = {}
-    inventory: dict = {}
+    isActive: bool = True
 
     class Config:
         allow_population_by_field_name = True
         json_encoders = {ObjectId: str}
         orm_mode = True
+        

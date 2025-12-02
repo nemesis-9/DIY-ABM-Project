@@ -20,7 +20,7 @@ app.add_middleware(
 async def startup_event():
     print("Initializing world data...")
 
-    # TODO: For fresh database
+    # TODO: Remove when no fresh database needed
     await wipe_database()
 
     # Await the asynchronous database initialization

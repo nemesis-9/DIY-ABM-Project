@@ -1,4 +1,4 @@
-def default_agent(name, age: int, x: int, y: int, z: int, hunger_max: int, metabolism: int, hp: int, inventory):
+def default_agent(name, age: int, x: int, y: int, z: int, hunger_max: int, metabolism: int, hp: int):
     return {
         "name": name,
         "age": age,
@@ -8,6 +8,5 @@ def default_agent(name, age: int, x: int, y: int, z: int, hunger_max: int, metab
         "hunger_max": hunger_max,
         "metabolism": metabolism,
         "hp": hp,
-        "skills": {"farm": 1, "build": 0},
-        "inventory": inventory
+        "skills": {"farm": 1, "build": 0}
     }

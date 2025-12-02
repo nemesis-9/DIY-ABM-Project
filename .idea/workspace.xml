@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86009ca5-1e24-4504-90a6-bba328e7e212" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/server/app/models/inventory.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/app/schemas/inventory_schema.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app/api/agent_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/api/agent_routes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/app/core/logics/agent_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/core/logics/agent_logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app/core/simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/core/simulation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app/core/world_init.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/core/world_init.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app/db/mongo.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/db/mongo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app/models/agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/models/agent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app/schemas/agent_schema.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/schemas/agent_schema.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +99,11 @@
       <workItem from="1764585183491" duration="6584000" />
       <workItem from="1764591887436" duration="6616000" />
       <workItem from="1764602991234" duration="2842000" />
-      <workItem from="1764639408618" duration="672000" />
+      <workItem from="1764639408618" duration="3152000" />
+      <workItem from="1764643817572" duration="1727000" />
+      <workItem from="1764645598810" duration="421000" />
+      <workItem from="1764646050296" duration="1170000" />
+      <workItem from="1764661732761" duration="74000" />
     </task>
     <servers />
   </component>
@@ -110,15 +123,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/server/app/api/agent_routes.py</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
