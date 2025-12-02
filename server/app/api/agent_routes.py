@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from ..db.mongo import agents
-from ..schemas.schema_agent import SchemaAgent
+from ..schemas.agent_schema import SchemaAgent
 
 router = APIRouter()
 

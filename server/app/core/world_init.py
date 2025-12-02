@@ -5,7 +5,7 @@ from ..models.agent import default_agent
 from ..models.building import house
 
 
-def random_value(min, max):
+def random_value(min=0, max=1):
     return random.randint(min, max)
 
 

@@ -1,7 +1,7 @@
 import os
 import asyncio
-from ..db.mongo import worlds, agents
-from ..core.agent_logic import update_agent
+from server.app.db.mongo import worlds, agents
+from server.app.core.logics.agent_logic import update_agent
 from dotenv import load_dotenv
 
 load_dotenv()

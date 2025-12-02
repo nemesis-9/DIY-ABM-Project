@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .api.routes_sim import router as sim_routes
-from .api.routes_worlds import router as world_routes
-from .api.routes_agents import router as agent_routes
+from .api.sim_routes import router as sim_routes
+from .api.world_routes import router as world_routes
+from .api.agent_routes import router as agent_routes
 from .core.world_init import init_world, wipe_database
 
 app = FastAPI(title="Inari Okami")

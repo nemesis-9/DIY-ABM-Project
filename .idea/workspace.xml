@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86009ca5-1e24-4504-90a6-bba328e7e212" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/app/schemas/PyObjectId.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/app/schemas/schema_agent.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app/api/routes_agents.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/api/routes_agents.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app/core/agent_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/core/agent_logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app/core/simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/core/simulation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app/core/world_init.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/core/world_init.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +87,7 @@
       <workItem from="1764585033521" duration="129000" />
       <workItem from="1764585183491" duration="6584000" />
       <workItem from="1764591887436" duration="6616000" />
-      <workItem from="1764602991234" duration="1466000" />
+      <workItem from="1764602991234" duration="2842000" />
     </task>
     <servers />
   </component>
